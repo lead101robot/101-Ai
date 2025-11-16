@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявки от 52₽ — роботы продаж и лидогенерация | VoiceReachBot</title>
+    <meta name="description" content="Получайте целевые заявки от 52₽ с помощью робота-прозвонщика и автоматизации лидогенерации. Агрессивный маркетинг, быстрый запуск, результат в первый день.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Заявки от 52₽ — роботы продаж и лидогенерация">
+    <meta property="og:description" content="Робот-прозвонщик, который приносит вам целевые заявки и снижает стоимость клиента.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voicereachbot.ru/">
+    <!-- Заменишь на свой логотип -->
+    <meta property="og:image" content="https://voicereachbot.ru/assets/preview.png">
+
+    <!-- Favicon (по желанию) -->
+    <link rel="icon" href="favicon.ico">
+
+    <style>
+        :root {
+            --bg-dark: #050509;
+            --bg-section: #0d0d16;
+            --accent-red: #ff1744;
+            --accent-orange: #ff9100;
+            --accent-green: #00e676;
+            --text-main: #ffffff;
+            --text-muted: #b8b8c7;
+            --border-light: rgba(255,255,255,0.08);
+            --shadow-strong: 0 20px 40px rgba(0,0,0,0.8);
+            --radius-lg: 18px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #1c0025 0, #050509 50%, #000000 100%);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px 80px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(14px);
+            background: linear-gradient(to bottom, rgba(5,5,9,0.95), rgba(5,5,9,0.7), transparent);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .logo-mark {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: conic-gradient(from 180deg, #ff1744, #ff9100, #ffea00, #ff1744);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 23, 68, 0.7);
+            font-size: 14px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a {
+            opacity: 0.7;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+            transition: width 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            box-shadow: 0 8px 20px rgba(255,23,68,0.55);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 0 12px 26px rgba(255,23,68,0.75);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+            gap: 40px;
+            padding: 60px 0 40px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(5,5,9,0.7);
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        .hero-badge span {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            font-weight: 700;
+        }
+
+        .hero-title {
+            font-size: 44px;
+            line-height: 1.02;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .hero-title span.highlight {
+            background: linear-gradient(135deg, #ffea00, var(--accent-orange), var(--accent-red));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin-bottom: 24px;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .hero-usp {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .hero-usp-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent-green);
+            box-shadow: 0 0 12px rgba(0,230,118,0.9);
+        }
+
+        .hero-right {
+            position: relative;
+        }
+
+        .hero-card {
+            background: radial-gradient(circle at top right, rgba(255,23,68,0.2), rgba(5,5,9,0.95));
+            border-radius: var(--radius-lg);
+            padding: 22px 22px 18px;
+            box-shadow: var(--shadow-strong);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .hero-card-title {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .hero-card-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.16);
+        }
+
+        .hero-card-main {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .big-number {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .big-number span.currency {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .big-caption {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            margin-top: 4px;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .metric {
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.08);
+            font-size: 12px;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .metric-value span.up {
+            color: var(--accent-green);
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+        .metric-value span.down {
+            color: var(--accent-red);
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: 40px;
+            background: radial-gradient(circle at 10% 0%, rgba(255,145,0,0.38), transparent 60%);
+            filter: blur(24px);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        section {
+            margin-top: 60px;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-label {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 11px;
+            color: var(--accent-orange);
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 26px;
+            text-transform: uppercase;
+        }
+
+        .section-title span {
+            color: var(--accent-red);
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-top: 6px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--bg-section);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            font-size: 14px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-tag {
+            display: inline-flex;
+            padding: 3px 8px;
+            font-size: 11px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.16);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .card-list {
+            margin-top: 10px;
+            list-style: none;
+        }
+
+        .card-list li {
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .card-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-orange);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 2.2fr 2fr;
+            gap: 22px;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .pill {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(0,0,0,0.35);
+        }
+
+        .tariffs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .tariff {
+            background: var(--bg-section);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 16px 34px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tariff.hot {
+            border-color: var(--accent-red);
+            box-shadow: 0 18px 44px rgba(255, 23, 68, 0.5);
+            position: relative;
+        }
+
+        .tariff-hot-label {
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .tariff-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .tariff-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .tariff-price {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tariff-price span {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .tariff-list {
+            margin-bottom: 14px;
+            list-style: none;
+        }
+
+        .tariff-list li {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding-left: 18px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .tariff-list li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-green);
+            font-size: 11px;
+        }
+
+        .tariff-bottom-note {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--bg-section);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            border: 1px solid var(--border-light);
+            font-size: 13px;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .faq-a {
+            color: var(--text-muted);
+        }
+
+        .contacts {
+            display: grid;
+            grid-template-columns: 2fr 2fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .contacts-box {
+            background: var(--bg-section);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            border: 1px solid var(--border-light);
+        }
+
+        .contacts-row {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .contacts-row span.label {
+            color: var(--text-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .contacts-row strong {
+            font-size: 15px;
+        }
+
+        .contacts-small {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 12px;
+            color: var(--text-muted);
+            padding-top: 18px;
+            margin-top: 40px;
+        }
+
+        .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .badge-danger {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 23, 68, 0.12);
+            border: 1px solid rgba(255, 23, 68, 0.6);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-top: 10px;
+        }
+
+        .wa-float {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 150;
+        }
+
+        .wa-float-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #25D366;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.7);
+            cursor: pointer;
+        }
+
+        .wa-float-btn img {
+            width: 26px;
+            height: 26px;
+        }
+
+        .wa-float-hint {
+            position: absolute;
+            right: 64px;
+            bottom: 12px;
+            background: rgba(5,5,9,0.9);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 11px;
+            border: 1px solid rgba(255,255,255,0.16);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-right {
+                order: -1;
+            }
+
+            .cards-grid,
+            .tariffs-grid,
+            .benefits-grid,
+            .faq-grid,
+            .contacts {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: 30px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+            }
+
+            .wrapper {
+                padding-bottom: 70px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="nav">
+        <div class="logo">
+            <div class="logo-mark">VR</div>
+            <div>VoiceReachBot</div>
+        </div>
+        <div class="nav-links">
+            <a href="#how">Как это работает</a>
+            <a href="#benefits">Преимущества</a>
+            <a href="#tariffs">Тарифы</a>
+            <a href="#contacts">Контакты</a>
+        </div>
+        <div class="nav-cta">
+            <button class="btn btn-outline" onclick="scrollToId('tariffs')">Тарифы</button>
+            <button class="btn btn-primary" onclick="openWhatsApp()">
+                В бой в WhatsApp
+            </button>
+        </div>
+    </nav>
+</header>
+
+<div class="wrapper">
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+        <div>
+            <div class="hero-badge">
+                <span>ЗАЯВКИ ОТ 52₽</span> без нытиков-менеджеров и потерь лидов
+            </div>
+            <h1 class="hero-title">
+                Задави конкурентов<br>
+                <span class="highlight">роботом продаж</span> и лидогенерацией
+            </h1>
+            <p class="hero-subtitle">
+                Мы превращаем холодный трафик в горячих клиентов с помощью агрессивного маркетинга
+                и робота-прозвонщика, который не спит, не устает и не сливает лиды.
+            </p>
+
+            <div class="hero-cta">
+                <button class="btn btn-primary" onclick="openWhatsApp()">
+                    Хочу заявки от 52₽
+                </button>
+                <button class="btn btn-outline" onclick="scrollToId('how')">
+                    Посмотреть механику
+                </button>
+            </div>
+
+            <div class="hero-usp">
+                <div class="hero-usp-item">
+                    <div class="dot"></div>
+                    <span>Запуск за 1–3 дня</span>
+                </div>
+                <div class="hero-usp-item">
+                    <div class="dot"></div>
+                    <span>Робот звонит 24/7</span>
+                </div>
+                <div class="hero-usp-item">
+                    <div class="dot"></div>
+                    <span>Контроль стоимости заявки</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="hero-glow"></div>
+            <div class="hero-card">
+                <div class="hero-card-header">
+                    <div>
+                        <div class="hero-card-title">КОНТРОЛЬ СТОИМОСТИ</div>
+                        <div style="font-size: 13px; margin-top: 4px; color: var(--text-muted);">
+                            Выжимаем максимум из каждого рубля рекламы
+                        </div>
+                    </div>
+                    <div class="hero-card-tag">LIVE-статистика</div>
+                </div>
+
+                <div class="hero-card-main">
+                    <div>
+                        <div class="big-number">
+                            <span class="currency">от</span> 52₽
+                        </div>
+                        <div class="big-caption">СТОИМОСТЬ ЗАЯВКИ</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 13px; color: var(--text-muted);">
+                            Робот-прозвонщик:
+                        </div>
+                        <div style="font-size: 18px; font-weight: 700;">
+                            +41% <span style="font-size: 13px;">к конверсии</span>
+                        </div>
+                        <div style="font-size: 12px; color: var(--accent-green); margin-top: 4px;">
+                            Менеджеры больше не сливают лиды
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Скорость реакции</div>
+                        <div class="metric-value">0.7 сек<span class="up">×5 быстрее</span></div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Снижение стоимости лида</div>
+                        <div class="metric-value">-37%<span class="down">меньше расходов</span></div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Автодозвон</div>
+                        <div class="metric-value">до 5 попыток</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Работа</div>
+                        <div class="metric-value">24/7</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+        <div class="section-header">
+            <div class="section-label">Механика</div>
+            <h2 class="section-title">Как <span>робот и маркетинг</span> делают вам деньги</h2>
+            <p class="section-subtitle">
+                Мы не просто льём трафик. Мы выстраиваем воронку, в которой робот-прозвонщик
+                добивает каждого лида до разговора с вашей продажей.
+            </p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-tag">Шаг 1</div>
+                <div class="card-title">Запуск агрессивной рекламной кампании</div>
+                <p>Отбираем «боевые» креативы, пишем цепляющие офферы и запускаем рекламу
+                    так, чтобы ваш конкурент увидел вас везде.</p>
+                <ul class="card-list">
+                    <li>Настройка Яндекс/Google, соцсетей</li>
+                    <li>Тестирование гипотез и офферов</li>
+                    <li>Фокус на стоимости заявки от 52₽</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-tag">Шаг 2</div>
+                <div class="card-title">Робот-прозвонщик берёт лид в работу</div>
+                <p>Как только заявка прилетает — робот звонит за секунды, квалифицирует
+                    клиента и заносит данные в CRM.</p>
+                <ul class="card-list">
+                    <li>Скрипты под вашу нишу</li>
+                    <li>Автодозвон тем, кто не взял трубку</li>
+                    <li>Моментальная реакция 24/7</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-tag">Шаг 3</div>
+                <div class="card-title">Горячий лид переходит к вам</div>
+                <p>Менеджер получает уже подогретого клиента. Остаётся только закрыть
+                    сделку — без «холодных» и «случайных» заявок.</p>
+                <ul class="card-list">
+                    <li>Статусы: холодный / тёплый / горячий</li>
+                    <li>Подбор окон для созвона</li>
+                    <li>Отчёты по каждой заявке</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section id="benefits">
+        <div class="section-header">
+            <div class="section-label">Преимущества</div>
+            <h2 class="section-title">Почему <span>робот</span> сильнее отдела продаж</h2>
+            <p class="section-subtitle">
+                Роботу всё равно — ночь, выходной или плохое настроение. Он звонит, дожимает,
+                фиксирует и возвращается к лиду снова и снова.
+            </p>
+        </div>
+
+        <div class="benefits-grid">
+            <div>
+                <div class="card">
+                    <div class="card-title">Менеджер устал — робот только разогревается</div>
+                    <ul class="card-list">
+                        <li>Не забывает перезвонить ни одному лиду</li>
+                        <li>Работает по скрипту, который мы тестируем и улучшаем</li>
+                        <li>Не спорит, не сливает, не «забывает» внести данные</li>
+                        <li>Отрабатывает возражения так, как выгодно вам</li>
+                    </ul>
+                    <div class="pill-row">
+                        <div class="pill">+ больше звонков</div>
+                        <div class="pill">+ выше конверсия</div>
+                        <div class="pill">- меньше фонд оплаты труда</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <div class="card-title">Идеально подходит, если вы:</div>
+                    <ul class="card-list">
+                        <li>Получаете заявки, но менеджеры физически не успевают</li>
+                        <li>Часто слышите «неудобно говорить» и теряете клиента</li>
+                        <li>Хотите масштабировать продажи без расширения штата</li>
+                        <li>Не готовы переплачивать за заявки выше 52–150₽</li>
+                    </ul>
+                    <div class="badge-danger">
+                        ⚡ Хватит кормить конкурентов — забирайте их лиды.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TARIFFS -->
+    <section id="tariffs">
+        <div class="section-header">
+            <div class="section-label">Тарифы</div>
+            <h2 class="section-title">Выбирайте, <span>насколько агрессивно</span> заходить</h2>
+            <p class="section-subtitle">
+                Начните с теста и переходите к масштабированию, когда увидите цифры.
+                Всё прозрачно: вы видите, за что платите и какие заявки получаете.
+            </p>
+        </div>
+
+        <div class="tariffs-grid">
+            <div class="tariff">
+                <div>
+                    <div class="tariff-name">Тест-драйв «ПРОБИВ»</div>
+                    <div class="tariff-desc">Для тех, кто хочет почувствовать, как работает связка маркетинга и робота.</div>
+                    <div class="tariff-price">от 15 000₽ <span>за тестовый запуск</span></div>
+                    <ul class="tariff-list">
+                        <li>Настройка рекламной кампании под 1 продукт/нишу</li>
+                        <li>Подключение робота-прозвонщика</li>
+                        <li>Скрипт под ваш бизнес</li>
+                        <li>Контроль стоимости заявки от 52₽</li>
+                        <li>Отчёт и рекомендации по масштабированию</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn btn-outline" onclick="openWhatsApp('Здравствуйте! Хочу тест-драйв «Пробив».')">
+                        Взять на тест
+                    </button>
+                    <div class="tariff-bottom-note">
+                        Подходит, если вы хотите быстро проверить гипотезу и цифры.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tariff hot">
+                <div class="tariff-hot-label">ТОП-выбор</div>
+                <div>
+                    <div class="tariff-name">Машина заявок</div>
+                    <div class="tariff-desc">Полноценная связка агрессивного трафика, робота и аналитики.</div>
+                    <div class="tariff-price">от 40 000₽ <span>+ рекламный бюджет</span></div>
+                    <ul class="tariff-list">
+                        <li>Разработка и ведение рекламных кампаний</li>
+                        <li>Внедрение и поддержка робота-прозвонщика</li>
+                        <li>Тестирование и доработка скриптов</li>
+                        <li>Глубокая аналитика стоимости и качества заявок</li>
+                        <li>Еженедельные созвоны и оптимизация</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openWhatsApp('Здравствуйте! Хочу тариф «Машина заявок».')">
+                        Запустить машину заявок
+                    </button>
+                    <div class="tariff-bottom-note">
+                        Для тех, кто готов серьёзно масштабировать продажи и доминировать в нише.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tariff">
+                <div>
+                    <div class="tariff-name">Индивидуальный «РАЗНОС»</div>
+                    <div class="tariff-desc">Если у вас сложная ниша, большие объёмы или своя CRM-инфраструктура.</div>
+                    <div class="tariff-price">по договорённости <span>после диагностики</span></div>
+                    <ul class="tariff-list">
+                        <li>Глубокий аудит маркетинга и продаж</li>
+                        <li>Разработка стратегии под вашу нишу</li>
+                        <li>Интеграция с вашими системами и CRM</li>
+                        <li>Отдельная команда под ваш проект</li>
+                        <li>Формат партнёрства: фикс + % от результата</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn btn-outline" onclick="openWhatsApp('Здравствуйте! Нужен индивидуальный формат сотрудничества.')">
+                        Обсудить условия
+                    </button>
+                    <div class="tariff-bottom-note">
+                        Для тех, кто мыслит категориями «рынок» и «доля», а не «пара заявок».
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="section-header">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Ответы на <span>острые вопросы</span></h2>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-q">А вдруг робот отпугнёт клиентов?</div>
+                <div class="faq-a">
+                    Мы не включаем робота «в лоб». Скрипты пишутся под вашу нишу, тон общения —
+                    как у живого оператора. Плюс мы тестируем связку на малом объёме перед масштабом.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Сколько нужно времени, чтобы всё запустить?</div>
+                <div class="faq-a">
+                    Базовый запуск — от 1 до 3 рабочих дней: подготовка офферов, настройка рекламы,
+                    скрипты, подключение робота и тестирование.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Вы гарантируете стоимость заявки от 52₽?</div>
+                <div class="faq-a">
+                    52₽ — минимальная планка, к которой мы стремимся в подходящих нишах и регионах.
+                    Реальные цифры зависят от конкуренции и продукта, но наша задача — выжать максимум.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">С чем вы точно не работаете?</div>
+                <div class="faq-a">
+                    Не берём откровенно «серые/чёрные» тематики и проекты без внятной юнит-экономики.
+                    Нам нужен результат не меньше, чем вам, поэтому на старте проводим честную диагностику.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="contacts">
+        <div class="section-header">
+            <div class="section-label">Контакты</div>
+            <h2 class="section-title">Готовы <span>идти в атаку</span> на свой рынок?</h2>
+            <p class="section-subtitle">
+                Напишите в WhatsApp — обсудим нишу, продукт и цифры, а затем посчитаем, во что обойдётся
+                заявка именно для вас.
+            </p>
+        </div>
+
+        <div class="contacts">
+            <div class="contacts-box">
+                <div class="contacts-row">
+                    <span class="label">WhatsApp</span>
+                    <!-- ЗАМЕНИ НОМЕР НИЖЕ НА СВОЙ -->
+                    <strong><a href="https://wa.me/79990000000" target="_blank">+7 (999) 000-00-00</a></strong>
+                </div>
+                <div class="contacts-row">
+                    <span class="label">Email</span>
+                    <strong><a href="mailto:sales@voicereachbot.ru">sales@voicereachbot.ru</a></strong>
+                </div>
+                <div class="contacts-row">
+                    <span class="label">Формат работы</span>
+                    <strong>Онлайн, любые регионы</strong>
+                </div>
+                <div class="contacts-small">
+                    Кратко расскажите, чем занимаетесь и какие цифры хотите получить — подготовим
+                    для вас план атаки с примерными прогнозами.
+                </div>
+                <button class="btn btn-primary" style="margin-top: 12px;" onclick="openWhatsApp()">
+                    Написать в WhatsApp
+                </button>
+            </div>
+
+            <div>
+                <div class="card">
+                    <div class="card-title">Что будет после заявки?</div>
+                    <ul class="card-list">
+                        <li>Вы пишете нам в WhatsApp</li>
+                        <li>Мы задаём 5–7 точных вопросов по нише и продукту</li>
+                        <li>Прикидываем вилка стоимости заявки (в том числе от 52₽)</li>
+                        <li>Согласуем бюджет и формат запуска</li>
+                        <li>Название игры: выбить конкурентов и забрать заявки себе</li>
+                    </ul>
+                    <div class="badge-danger">
+                        ⛔ Никаких «посидим-подумать». Либо запускаемся, либо расходимся.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-row">
+            <div>© <span id="year"></span> VoiceReachBot. Все права защищены.</div>
+            <div class="footer-links">
+                <a href="#top">Вверх</a>
+                <span>•</span>
+                <a href="#contacts">Связаться</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Плавающая кнопка WhatsApp -->
+<div class="wa-float" onclick="openWhatsApp()">
+    <div class="wa-float-hint">Написать в WhatsApp</div>
+    <div class="wa-float-btn">
+        <!-- Можно заменить на свой svg/иконку -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </div>
+</div>
+
+<script>
+    function scrollToId(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function openWhatsApp(message) {
+        // ЗАМЕНИ ЭТОТ НОМЕР НА СВОЙ: только цифры, без +
+        var phone = '79990000000';
+        var text = message || 'Здравствуйте! Хочу запустить заявки от 52₽ с роботом-прозвонщиком.';
+        var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
+        window.open(url, '_blank');
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
