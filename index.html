@@ -52,8 +52,8 @@
       font-size:13px;
       box-shadow:0 0 18px rgba(255,23,68,.7);
     }
-    .nav-links {display:flex;gap:18px;text-transform:uppercase;}
-    .nav-links a {opacity:.7;position:relative;}
+    .nav-links {display:flex;gap:18px;text-transform:uppercase;position:relative;}
+    .nav-links a {opacity:.7;position:relative;z-index:1;}
     .nav-links a::after{
       content:"";position:absolute;left:0;bottom:-4px;height:2px;width:0;
       background:linear-gradient(90deg,var(--accent),var(--accent2));
@@ -61,6 +61,31 @@
     }
     .nav-links a:hover{opacity:1;}
     .nav-links a:hover::after{width:100%;}
+
+    /* Подсветка и мягкий перелив под ссылками меню */
+    .nav-links a::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      bottom: -4px;
+      left: -10px;
+      right: -10px;
+      border-radius: 8px;
+      background: linear-gradient(
+        130deg,
+        rgba(255,23,68,.35),
+        rgba(255,145,0,.35),
+        rgba(0,230,118,.35)
+      );
+      opacity: 0;
+      transition: opacity .25s;
+      filter: blur(8px);
+      z-index: -1;
+    }
+    .nav-links a:hover::before {
+      opacity: 1;
+    }
+
     .btn{
       border:none;border-radius:999px;
       padding:9px 18px;
@@ -69,19 +94,80 @@
       display:inline-flex;align-items:center;justify-content:center;
       white-space:nowrap;
       transition:transform .12s,box-shadow .12s,background .12s;
+      position: relative;
+      overflow: hidden;
     }
     .btn-primary{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:#fff;
       box-shadow:0 8px 20px rgba(255,23,68,.5);
     }
-    .btn-primary:hover{transform:translateY(-1px) scale(1.01);}
     .btn-outline{
       background:transparent;color:#fff;
       border:1px solid rgba(255,255,255,.4);
     }
+    .btn-primary:hover{transform:translateY(-1px) scale(1.01);}
     .btn-outline:hover{background:rgba(255,255,255,.06);}
+
     .nav-cta{display:flex;gap:10px;align-items:center;}
+
+    /* Градиентный перелив поверх кнопок и пульсация */
+    .btn-primary::before,
+    .btn-outline::before,
+    .wa-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 300%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 23, 68, 0.7),
+        rgba(255, 145, 0, 0.7),
+        rgba(0, 230, 118, 0.7),
+        rgba(255, 23, 68, 0.7)
+      );
+      animation: glow 4.2s linear infinite;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      animation: pulse-btn 2.4s ease-in-out infinite;
+    }
+
+    .wa-btn {
+      animation: pulse-wa 2.4s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes glow {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes pulse-btn {
+      0%, 100% {
+        box-shadow: 0 8px 20px rgba(255,23,68,0.35);
+      }
+      50% {
+        box-shadow: 0 12px 28px rgba(255,23,68,0.75);
+      }
+    }
+
+    @keyframes pulse-wa {
+      0%, 100% {
+        box-shadow: 0 10px 24px rgba(0,0,0,0.7);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 14px 32px rgba(37,211,102,0.9);
+        transform: scale(1.04);
+      }
+    }
 
     /* hero */
     .hero{
@@ -111,6 +197,7 @@
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px;}
     .hero-tags{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);}
     .tag-dot{width:6px;height:6px;border-radius:999px;background:var(--accent3);box-shadow:0 0 10px rgba(0,230,118,.9);}
+
     .hero-card{
       background:radial-gradient(circle at top right,rgba(255,23,68,.28),var(--bg2));
       border-radius:var(--radius);
@@ -165,7 +252,7 @@
     }
 
     /* cases */
-    .cases-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+    .cases-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
     .case{
       background:var(--card);border-radius:var(--radius);padding:14px;
       border:1px solid rgba(255,255,255,.16);
@@ -396,74 +483,68 @@
         Здесь — реальные звонки из проектов, где робот дожимает клиентов до оплаты, записи на
         встречу или консультацию.
       </p>
-      </div>
-    <div class="case">
-  <div class="case-title">
-    Строительство домов: робот обрабатывает сложного клиента «в теме»
-  </div>
-
-  <div class="case-meta">
-    Ниша: строительство частных домов • задача: обработать входящую заявку и выявить потребность
-  </div>
-
-  <audio controls>
-    <source src="case-11.wav" type="audio/wav">
-    Ваш браузер не поддерживает аудио.
-  </audio>
-
-  <div class="case-note">
-    Клиент пытался проверять робота и «ломать» сценарий, задавал уточняющие вопросы и даже 
-    пробовал вывести разговор в сторону. Но робот уверенно возвращал диалог к цели, 
-    задавал корректные вопросы, выявлял параметры строительства и добился нужного результата.
-  </div>
-</div>
     </div>
-    <div class="case">
-  <div class="case-title">Онлайн-курс: робот дожимает до оплаты</div>
-  <div class="case-meta">Ниша: онлайн-образование • задача: вернуть «сомневающихся»</div>
 
-  <audio controls>
-    <source src="case-3.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает аудио.
-  </audio>
+    <div class="cases-grid">
+      <div class="case">
+        <div class="case-title">
+          Строительство домов: робот обрабатывает сложного клиента «в теме»
+        </div>
+        <div class="case-meta">
+          Ниша: строительство частных домов • задача: обработать входящую заявку и выявить потребность
+        </div>
+        <audio controls>
+          <source src="case-11.wav" type="audio/wav">
+          Ваш браузер не поддерживает аудио.
+        </audio>
+        <div class="case-note">
+          Клиент пытался проверять робота и «ломать» сценарий, задавал уточняющие вопросы и даже
+          пробовал вывести разговор в сторону. Но робот уверенно возвращал диалог к цели,
+          задавал корректные вопросы, выявлял параметры строительства и добился нужного результата.
+        </div>
+      </div>
 
-  <div class="case-note">
-    Робот мягко отрабатывает возражения, прогревает и выводит клиента на «да».
-  </div>
-</div>
+      <div class="case">
+        <div class="case-title">Онлайн-курс: робот дожимает до оплаты</div>
+        <div class="case-meta">Ниша: онлайн-образование • задача: вернуть «сомневающихся»</div>
+        <audio controls>
+          <source src="case-3.mp3" type="audio/mpeg">
+          Ваш браузер не поддерживает аудио.
+        </audio>
+        <div class="case-note">
+          Робот мягко отрабатывает возражения, прогревает и выводит клиента на «да».
+        </div>
+      </div>
 
-     </div>
-    <div class="case">
-  <div class="case-title">Стоматологическая клиника: возврат старых клиентов</div>
-  <div class="case-meta">Ниша: медицина • задача: вернуть пациентов, которые давно не посещали клинику</div>
-
-  <audio controls>
-    <source src="case-6.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает аудио.
-  </audio>
-
-  <div class="case-note">
-    Робот аккуратно напоминает клиенту о клинике, проверяет актуальный интерес,
-    предлагает акцию и приводит клиента к повторной записи.
-  </div>
-</div>
+      <div class="case">
+        <div class="case-title">Стоматологическая клиника: возврат старых клиентов</div>
+        <div class="case-meta">Ниша: медицина • задача: вернуть пациентов, которые давно не посещали клинику</div>
+        <audio controls>
+          <source src="case-6.mp3" type="audio/mpeg">
+          Ваш браузер не поддерживает аудио.
+        </audio>
+        <div class="case-note">
+          Робот аккуратно напоминает клиенту о клинике, проверяет актуальный интерес,
+          предлагает акцию и приводит клиента к повторной записи.
+        </div>
+      </div>
 
       <div class="case">
         <div class="case-title">Недвижимость: запись на просмотр</div>
         <div class="case-meta">Ниша: недвижимость • задача: вывести клиента на встречу</div>
         <audio controls>
-    <source src="case-9.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает аудио.
-  </audio>
-
-  <div class="case-note">
+          <source src="case-9.mp3" type="audio/mpeg">
+          Ваш браузер не поддерживает аудио.
+        </audio>
+        <div class="case-note">
           Робот быстро квалифицирует, снимает сомнения и фиксирует конкретное время визита.
         </div>
       </div>
     </div>
 
     <p class="small" style="max-width:600px;margin-top:14px;">
-     
+      Используйте только те аудиозаписи, на которые у вас есть права: собственные звонки робота
+      или кейсы, которые вы сделали сами.
     </p>
   </section>
 
@@ -481,18 +562,18 @@
       <div class="tariff">
         <div>
           <div class="tariff-name">Тест «Новичок»</div>
-          <div class="tariff-desc">Вы покупаете только заявки по 52₽ за шт .</div>
-          <div class="tariff-price">1000 заявок 52 000₽ <span>+ реклама</span></div>
+          <div class="tariff-desc">Вы покупаете только заявки по 52₽ за штуку.</div>
+          <div class="tariff-price">1000 заявок — 52 000₽ <span>+ реклама</span></div>
           <ul>
             <li>1 ниша / 1 продукт</li>
             <li>Сбор информации о конкурентах</li>
-            <li>Предача заявок в АМО, Битрикс24, Телеграмм</li>
+            <li>Передача заявок в AmoCRM, Битрикс24, Telegram</li>
             <li>Фиксированная стоимость заявки 52₽</li>
           </ul>
         </div>
         <div>
           <button class="btn btn-outline"
-                  onclick="openWhatsApp('Здравствуйте! Хочу тестовый запуск «Пробив».')">
+                  onclick="openWhatsApp('Здравствуйте! Хочу тестовый запуск «Новичок».')">
             Взять на тест
           </button>
           <div class="tariff-note">Оптимально, чтобы быстро увидеть, как робот работает с вашими заявками.</div>
@@ -550,14 +631,13 @@
       <div class="sec-label">Контакты</div>
       <h2 class="sec-title">Готовы <span>снизить расходы</span> на рекламу в 10 раз?</h2>
       <p class="sec-sub">
-        Напишите в WhatsApp — разберёмся в продукте, цифрах и посчитаем, селлько заявок мы можем дать
+        Напишите в WhatsApp — разберёмся в продукте, цифрах и посчитаем, сколько заявок мы можем дать
         именно в вашей нише.
       </p>
     </div>
     <div class="contacts">
       <div class="contacts-box">
         <div class="row-label">WhatsApp</div>
-        <!-- ЗАМЕНИ НОМЕР НА СВОЙ -->
         <div class="row-main">
           <a href="https://wa.me/79790246984" target="_blank">+7 (979) 024-69-84</a>
         </div>
@@ -584,7 +664,7 @@
           </li>
           <li style="padding-left:16px;position:relative;margin-bottom:4px;">
             <span style="position:absolute;left:0;top:0;color:var(--accent2);">▹</span>
-            Оценим, возможено ли получить заявку от 52₽ в вашей нише
+            Оценим, возможно ли получить заявку от 52₽ в вашей нише
           </li>
           <li style="padding-left:16px;position:relative;margin-bottom:4px;">
             <span style="position:absolute;left:0;top:0;color:var(--accent2);">▹</span>
@@ -624,7 +704,7 @@
     if(el){el.scrollIntoView({behavior:'smooth'});}
   }
   function openWhatsApp(message){
-    // ЗАМЕНИ НОМЕР НИЖЕ НА СВОЙ: только цифры, без +
+    // Номер: только цифры, без +
     var phone = '79790246984';
     var text = message || 'Здравствуйте! Хочу запустить заявки от 52₽ с голосовым роботом.';
     var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
@@ -635,13 +715,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
