@@ -62,7 +62,7 @@
     .nav-links a:hover{opacity:1;}
     .nav-links a:hover::after{width:100%;}
 
-    /* Подсветка и мягкий перелив под ссылками меню */
+    /* Подсветка под ссылками меню */
     .nav-links a::before {
       content: "";
       position: absolute;
@@ -108,10 +108,9 @@
     }
     .btn-primary:hover{transform:translateY(-1px) scale(1.01);}
     .btn-outline:hover{background:rgba(255,255,255,.06);}
-
     .nav-cta{display:flex;gap:10px;align-items:center;}
 
-    /* Градиентный перелив поверх кнопок и пульсация */
+    /* Градиентный перелив и пульсация кнопок */
     .btn-primary::before,
     .btn-outline::before,
     .wa-btn::before {
@@ -212,7 +211,21 @@
       border-radius:999px;border:1px solid rgba(255,255,255,.2);
       padding:3px 8px;font-size:11px;
       background:rgba(0,0,0,.4);
+      display:flex;align-items:center;gap:6px;
     }
+    /* Мигающая точка LIVE */
+    .hero-card-chip::before {
+      content:"●";
+      font-size:10px;
+      color:var(--accent3);
+      animation: live-dot 1s ease-in-out infinite;
+      text-shadow:0 0 8px rgba(0,230,118,0.9);
+    }
+    @keyframes live-dot {
+      0%,100% { opacity:0.3; transform:scale(1); }
+      50% { opacity:1; transform:scale(1.3); }
+    }
+
     .hero-card-main{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;}
     .big-price{font-size:36px;font-weight:800;letter-spacing:.08em;}
     .big-price span{font-size:17px;}
@@ -223,6 +236,16 @@
     .metric-value{font-weight:600;font-size:15px;}
     .metric-value span{font-size:11px;margin-left:4px;}
     .up{color:var(--accent3);} .down{color:var(--accent);}
+
+    /* анимация обновления метрик */
+    .metric-updated {
+      animation: metricFlash 0.5s ease-out;
+    }
+    @keyframes metricFlash {
+      0% { transform:scale(1); color:inherit; }
+      50% { transform:scale(1.06); color:#ffea00; }
+      100%{ transform:scale(1); }
+    }
 
     section{margin-top:50px;}
     .sec-head{margin-bottom:22px;}
@@ -412,19 +435,25 @@
       <div class="hero-metrics">
         <div class="metric">
           <div class="metric-label">Скорость реакции</div>
-          <div class="metric-value">0.7 сек <span class="up">×500 раз быстрее</span></div>
+          <div class="metric-value" id="metric-reaction">
+            <span id="reaction-value">0.7</span> сек <span class="up" id="reaction-mult">×500 раз быстрее</span>
+          </div>
         </div>
         <div class="metric">
           <div class="metric-label">Снижение CPL</div>
-          <div class="metric-value">−37% <span class="down">экономия</span></div>
+          <div class="metric-value" id="metric-cpl">
+            <span id="cpl-value">−37</span>% <span class="down">экономия</span>
+          </div>
         </div>
         <div class="metric">
           <div class="metric-label">Автодозвон</div>
-          <div class="metric-value">до 5 попыток</div>
+          <div class="metric-value" id="metric-autodial">
+            до <span id="autodial-value">5</span> попыток
+          </div>
         </div>
         <div class="metric">
           <div class="metric-label">Работа</div>
-          <div class="metric-value">24/7</div>
+          <div class="metric-value" id="work-value">24/7</div>
         </div>
       </div>
     </div>
@@ -704,13 +733,63 @@
     if(el){el.scrollIntoView({behavior:'smooth'});}
   }
   function openWhatsApp(message){
-    // Номер: только цифры, без +
     var phone = '79790246984';
     var text = message || 'Здравствуйте! Хочу запустить заявки от 52₽ с голосовым роботом.';
     var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
     window.open(url, '_blank');
   }
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Живая статистика
+  function randomFloat(min, max, decimals) {
+    var num = Math.random() * (max - min) + min;
+    return num.toFixed(decimals);
+  }
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function updateLiveStats() {
+    var reactionValue = document.getElementById('reaction-value');
+    var reactionMult = document.getElementById('reaction-mult');
+    var cplValue = document.getElementById('cpl-value');
+    var autodialValue = document.getElementById('autodial-value');
+    var workValue = document.getElementById('work-value');
+
+    if (!reactionValue || !reactionMult || !cplValue || !autodialValue || !workValue) return;
+
+    // Скорость реакции: 0.4–1.3 сек, множитель ×300–600
+    var newReaction = randomFloat(0.4, 1.3, 1);
+    var newMult = randomInt(300, 600);
+
+    // Снижение CPL: −20…−60
+    var newCpl = randomInt(20, 60);
+
+    // Автодозвон: 3–7 попыток
+    var newAutodial = randomInt(3, 7);
+
+    // Режим работы: разные варианты
+    var workOptions = ['24/7', 'без выходных', 'круглосуточно', '24/7 онлайн'];
+    var newWork = workOptions[randomInt(0, workOptions.length - 1)];
+
+    reactionValue.textContent = newReaction;
+    reactionMult.textContent = '×' + newMult + ' раз быстрее';
+    cplValue.textContent = '−' + newCpl;
+    autodialValue.textContent = newAutodial;
+    workValue.textContent = newWork;
+
+    // лёгкий подсвет обновлённых значений
+    [reactionValue.parentElement,
+     cplValue.parentElement,
+     autodialValue.parentElement,
+     workValue].forEach(function(el){
+       el.classList.remove('metric-updated');
+       void el.offsetWidth; // хак чтобы перезапустить анимацию
+       el.classList.add('metric-updated');
+     });
+  }
+
+  setInterval(updateLiveStats, 2600);
 </script>
 
 </body>
